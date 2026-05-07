@@ -58,15 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Main.cs" />
+    <Compile Include="Features\AutoAttackFeature.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Patches\CharPatches.cs" />
     <Compile Include="Patches\GameScrPatches.cs" />
     <Compile Include="Patches\MobPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetPath)" "D:\Game\DragonBoy247-pc\BepInEx\plugins\" /y</PostBuildEvent>

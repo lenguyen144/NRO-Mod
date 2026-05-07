@@ -9,14 +9,33 @@ namespace NRO_Mod.Patches
         [HarmonyPatch(nameof(GameScr.paint))]
         public static void paint(mGraphics g)
         {
-            global::Char me = global::Char.myCharz();
-            string new_text = "Level boss: ";
-            if (me.mobFocus != null) new_text += me.mobFocus.levelBoss.ToString();
-            else new_text = "Bạn chưa chọn con quái nào";
-
-            global::mFont.tahoma_7b_blue.drawString(g, new_text, 10, 70, 0);
-
+            global::mFont.tahoma_7_white.drawString(g, Models.SettingsModel.IsAutoAttack ? "Auto Attack: bật" : "Auto Attack: tắt", 10, 70, 0);
             
+            
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(GameScr.updateKey))]
+        public static bool updateKey(GameScr __instance)
+        {
+            if (GameCanvas.keyAsciiPress != 0)
+            {
+                if (__instance.mobCapcha == null)
+                {
+                    if (TField.isQwerty)
+                    {
+                        if (GameCanvas.keyAsciiPress == 97)
+                        {
+                            Models.SettingsModel.IsAutoAttack = !Models.SettingsModel.IsAutoAttack;
+                            string text = Models.SettingsModel.IsAutoAttack ? "Bạn đã bật tự động đánh" : "Bạn đã tắt tự động đánh";
+
+                            GameScr.info1.addInfo(text, 0);
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
