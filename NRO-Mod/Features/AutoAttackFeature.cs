@@ -24,7 +24,7 @@ namespace NRO_Mod.Features
             long currentTime = global::mSystem.currentTimeMillis();
             if (currentTime - currentSkill.lastTimeUseThisSkill >= currentSkill.coolDown)
             {
-                me.setAttack();
+                GameScr.gI().doSelectSkill(currentSkill, true);
             }
 
         }
