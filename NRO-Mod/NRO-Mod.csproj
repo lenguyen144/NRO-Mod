@@ -63,6 +63,7 @@
     <Compile Include="Patches\CharPatches.cs" />
     <Compile Include="Patches\GameScrPatches.cs" />
     <Compile Include="Patches\MobPatches.cs" />
+    <Compile Include="Patches\TileMapPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

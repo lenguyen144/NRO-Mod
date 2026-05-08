@@ -9,7 +9,7 @@ namespace NRO_Mod.Patches
         [HarmonyPostfix]
         public static void update(Char __instance)
         {
-            if (__instance.me && !__instance.isDie && __instance.statusMe != 14 && Models.SettingsModel.IsAutoAttack)
+            if (__instance.me && Models.SettingsModel.IsAutoAttack)
             {
                 Features.AutoAttackFeature.execute();
             }

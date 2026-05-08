@@ -4,17 +4,20 @@ namespace NRO_Mod.Features
 {
     public class AutoAttackFeature
     {
-        public static Mob target = null;
+        protected static Mob target = null;
+
+        protected static long timeDelay = 1000;
+        protected static long timeLast = 0;
 
         public static void execute()
         {
-            if (!Models.SettingsModel.IsAutoAttack ) return;
+            global::Char me = global::Char.myCharz();
+            if (me == null) return;
+
+            if (me.isDie && me.statusMe == 14) return;
 
             if (target == null || target.status == 1 || target.status == 0 || target.levelBoss > 0) target = getRamdomMob();
             if (target == null) return;
-
-            global::Char me = global::Char.myCharz();
-            if (me == null) return;
 
             me.focusManualTo(target);
 
@@ -22,9 +25,18 @@ namespace NRO_Mod.Features
             if (currentSkill == null) return;
 
             long currentTime = global::mSystem.currentTimeMillis();
-            if (currentTime - currentSkill.lastTimeUseThisSkill >= currentSkill.coolDown)
+            if (Res.abs(me.cx - target.x) > currentSkill.dx || Res.abs(me.cy - target.y) > currentSkill.dy)
+            {
+                if (currentTime - timeLast >= timeDelay)
+                {
+                    GameScr.gI().doSelectSkill(currentSkill, true);
+                    timeLast = currentTime;
+                }
+            }
+            else if (currentTime - currentSkill.lastTimeUseThisSkill >= currentSkill.coolDown)
             {
                 GameScr.gI().doSelectSkill(currentSkill, true);
+                timeLast = 0;
             }
 
         }
@@ -44,6 +56,11 @@ namespace NRO_Mod.Features
             }
 
             return null;
+        }
+
+        public static void reset()
+        {
+            target = null;
         }
     }
 }

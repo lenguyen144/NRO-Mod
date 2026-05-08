@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System.Threading;
 
 namespace NRO_Mod.Patches
 {
@@ -10,7 +11,6 @@ namespace NRO_Mod.Patches
         public static void paint(mGraphics g)
         {
             global::mFont.tahoma_7_white.drawString(g, Models.SettingsModel.IsAutoAttack ? "Auto Attack: bật" : "Auto Attack: tắt", 10, 70, 0);
-            
             
         }
 
