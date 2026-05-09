@@ -59,6 +59,9 @@
   <ItemGroup>
     <Compile Include="Core\Main.cs" />
     <Compile Include="Features\AutoAttackFeature.cs" />
+    <Compile Include="Features\MarkingFeature.cs" />
+    <Compile Include="Models\MarkedModel.cs" />
+    <Compile Include="Models\MobModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Patches\CharPatches.cs" />
     <Compile Include="Patches\GameScrPatches.cs" />
