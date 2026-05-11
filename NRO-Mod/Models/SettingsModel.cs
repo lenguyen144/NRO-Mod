@@ -5,6 +5,6 @@
         public static bool IsAutoAttack;
         public static bool isAttackMarkedMob;
 
-        public static MarkedModel markedModel;
+        public static MarkedModel markedModel = new MarkedModel();
     }
 }

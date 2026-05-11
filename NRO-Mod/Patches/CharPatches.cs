@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 
 namespace NRO_Mod.Patches
 {
@@ -14,5 +15,6 @@ namespace NRO_Mod.Patches
                 Features.AutoAttackFeature.execute();
             }
         }
+
     }
 }

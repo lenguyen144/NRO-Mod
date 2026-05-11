@@ -3,15 +3,15 @@ namespace NRO_Mod.Models
 {
     public class MarkedModel
     {
-        public MyVector vMarkedMobByID;
+        public MyVector vMarkedMobByID = new MyVector();
         public int area;
 
-        public int findMarkedMob(int id)
+        public int findMarkedMob(int id, int mapID)
         {
             for (int i = 0; i < vMarkedMobByID.size(); i++)
             {
                 MobModel mobModel = (MobModel)vMarkedMobByID.elementAt(i);
-                if (mobModel.id == id) return i;
+                if (mobModel.id == id && mobModel.mapID == mapID) return i;
             }
 
             return -1;

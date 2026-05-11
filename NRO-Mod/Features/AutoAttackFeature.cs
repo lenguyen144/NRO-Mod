@@ -58,6 +58,20 @@ namespace NRO_Mod.Features
             return null;
         }
 
+        public static Mob getMarkedMob()
+        {
+            for (int i = 0; i < MarkingFeature.vMarkedMob.size(); i++)
+            {
+                Mob mob = (Mob)MarkingFeature.vMarkedMob.elementAt(i);
+
+                if (mob.status == 0 || mob.status == 1 || mob.levelBoss > 0 || mob.isMobMe) continue;
+
+                return mob;
+            }
+
+            return null;
+        }
+
         public static void reset()
         {
             target = null;

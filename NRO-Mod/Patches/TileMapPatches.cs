@@ -11,6 +11,7 @@ namespace NRO_Mod.Patches
         public static void loadMap(int tileId)
         {
             AutoAttackFeature.reset();
+            MarkingFeature.loadData();
         }
 
     }

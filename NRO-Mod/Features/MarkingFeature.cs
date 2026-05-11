@@ -4,7 +4,7 @@ namespace NRO_Mod.Features
 {
     public class MarkingFeature
     {
-        public static MyVector vMarkedMob;
+        public static MyVector vMarkedMob = new MyVector();
 
         public static void loadData()
         {
@@ -40,9 +40,9 @@ namespace NRO_Mod.Features
         /// hàm này sẽ lấy mapID hiện tại mà người chơi đang ở để thêm thông tin cho mobMode nên dùng hàm này phải cẩn thận.| 
         /// id: là id của mob cần đánh dấu không phải id chung của loại quái đấy.
         /// </summary>
-        public static void toggleMarkedMob(int id)
+        public static void toggleMarkedMob(int id, int mapID)
         {
-            int index = SettingsModel.markedModel.findMarkedMob(id);
+            int index = SettingsModel.markedModel.findMarkedMob(id, mapID);
             if (index != -1)
             {
                 SettingsModel.markedModel.removeMarkedMobAt(index);
@@ -52,7 +52,6 @@ namespace NRO_Mod.Features
             {
                 if (GameScr.findMobInMap(id) != null)
                 {
-                    int mapID = TileMap.mapID;
                     SettingsModel.markedModel.MarkedMob(id, mapID);
 
                     loadVMarkedMob();

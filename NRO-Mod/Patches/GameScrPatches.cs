@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
-using System.Threading;
+using NRO_Mod.Features;
+using NRO_Mod.Models;
 
 namespace NRO_Mod.Patches
 {
@@ -30,6 +31,28 @@ namespace NRO_Mod.Patches
                             string text = Models.SettingsModel.IsAutoAttack ? "Bạn đã bật tự động đánh" : "Bạn đã tắt tự động đánh";
 
                             GameScr.info1.addInfo(text, 0);
+                        }
+                        else if (GameCanvas.keyAsciiPress == 109)
+                        {
+                            global::Char me = global::Char.myCharz();
+                            if (me != null)
+                            {
+                                if (me.mobFocus != null)
+                                {
+                                    MarkingFeature.toggleMarkedMob(me.mobFocus.mobId, TileMap.mapID);
+                                }
+                                else
+                                {
+                                    GameScr.info1.addInfo("Bạn chưa chọn mục tiêu nào", 0);
+                                }
+                            }
+                        }
+                        else if (GameCanvas.keyAsciiPress == 107)
+                        {
+                            GameCanvas.keyAsciiPress = 0;
+                            PanelPatches.isModPanel = true;
+                            GameCanvas.panel.setTypeOption();
+                            GameCanvas.panel.show();                         
                         }
                     }
                 }

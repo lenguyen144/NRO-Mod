@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using NRO_Mod.Features;
 
 namespace NRO_Mod.Patches
 {
@@ -9,13 +10,18 @@ namespace NRO_Mod.Patches
         [HarmonyPatch(nameof(Mob.paint))]
         public static bool paint(Mob __instance, mGraphics g)
         {
-            global::Char me = global::Char.myCharz();
-            if (me.mobFocus != null && me.mobFocus == __instance)
-            {
-                global::mFont.tahoma_7b_white.drawString(g, "Mày xui rồi con!", me.mobFocus.x, me.mobFocus.y - me.mobFocus.h - 20, mFont.CENTER);
-            }
+            highlight_VMarkedMob(g);
 
             return true;
+        }
+
+        public static void highlight_VMarkedMob(mGraphics g)
+        {
+            for (int i = 0; i < MarkingFeature.vMarkedMob.size(); i++)
+            {
+                Mob mob = (Mob)MarkingFeature.vMarkedMob.elementAt(i);
+                global::mFont.tahoma_7b_red.drawString(g, "X", mob.x, mob.y - mob.h - 20, mFont.CENTER);
+            }
         }
 
     }
