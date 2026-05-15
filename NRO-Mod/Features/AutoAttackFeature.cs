@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NRO_Mod.Models;
+using UnityEngine;
 
 namespace NRO_Mod.Features
 {
@@ -16,7 +17,18 @@ namespace NRO_Mod.Features
 
             if (me.isDie && me.statusMe == 14) return;
 
-            if (target == null || target.status == 1 || target.status == 0 || target.levelBoss > 0) target = getRamdomMob();
+            if (target == null || target.status == 1 || target.status == 0 || target.levelBoss > 0)
+            {
+                if (SettingsModel.isAttackMarkedMob)
+                {
+                    target = getMarkedMob();
+                }
+                else
+                {
+                    target = getMobInMap();
+                }
+            }
+
             if (target == null) return;
 
             me.focusManualTo(target);
@@ -44,7 +56,7 @@ namespace NRO_Mod.Features
         /// <summary>
         /// Lấy một con quái bất kì trong map
         /// </summary>
-        public static Mob getRamdomMob()
+        public static Mob getMobInMap()
         {
             for (int i = 0; i < global::GameScr.vMob.size(); i++)
             {

@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using NRO_Mod.Features;
 using NRO_Mod.Models;
+using System;
 
 namespace NRO_Mod.Patches
 {
@@ -47,12 +48,11 @@ namespace NRO_Mod.Patches
                                 }
                             }
                         }
-                        else if (GameCanvas.keyAsciiPress == 107)
+                        else if (GameCanvas.keyAsciiPress == 108)
                         {
                             GameCanvas.keyAsciiPress = 0;
-                            PanelPatches.isModPanel = true;
-                            GameCanvas.panel.setTypeOption();
-                            GameCanvas.panel.show();                         
+                            PanelPatches.setTypeMod(GameCanvas.panel);
+                            GameCanvas.panel.show();
                         }
                     }
                 }
